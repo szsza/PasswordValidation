@@ -14,6 +14,9 @@ public class Main {
             System.out.println("Parola trebuie sa aiba cel putin 6 caractere");
             valid = false;
         }
+
+
+/*
         if (!Pattern.matches(".*[a-z].*", pwd)) {
             System.out.println("Parola trebuie sa aiba cel putin o litera mica");
             valid=false;
@@ -27,6 +30,14 @@ public class Main {
             valid=false;
         }
 
+ */
+
+        boolean hasLowerCase = isValid(".*[a-z].*",pwd,"Parola trebuie sa aiba cel putin o litera mica");
+        boolean hasUpperCase = isValid(".*[A-Z].*",pwd,"Parola trebuie sa aiba cel putin o litera mare");
+        boolean hasDigit = isValid(".*\\d.*",pwd,"Parola trebuie sa aiba cel putin o cifra");
+
+        valid = valid && hasLowerCase && hasUpperCase && hasDigit;
+
         System.out.println(valid ? "Parola a fost acceptata" : "Parola incorecta. Incercati din nou.");
 
 
@@ -38,5 +49,13 @@ public class Main {
          */
 
 
+    }
+
+    private static boolean isValid (String regex, String pwd, String message) {
+        if (Pattern.matches(regex, pwd)) {
+            return true;
+        }
+        System.out.println(message);
+        return false;
     }
 }
